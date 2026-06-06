@@ -23,7 +23,7 @@ app.add_middleware(
 )
 
 # โหลด Pipeline
-llm_service = QwenExtractor("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")
+llm_service = QwenExtractor(HF_TOKEN)
 
 pipeline = DiabetesRiskPipeline(
     model_path="models/evita_diabetes_risk_model.json",
@@ -37,3 +37,7 @@ def root():
 @app.post("/predict")
 async def predict(data: dict):
     return pipeline.process_and_predict(data)
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
