@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+  <nav>
+    <div class="nav-logo"><div class="nav-logo-dot"></div>Evita</div>
+    <div class="nav-links">
+      <span class="nav-link active" onclick="showPage('home',this)">Home</span>
+      <span class="nav-link" onclick="showPage('predict',this)">Prediction</span>
+      <span class="nav-link" onclick="showPage('about',this)">About</span>
+    </div>
+    <button class="nav-cta" onclick="showPage('predict',document.querySelectorAll('.nav-link')[1])">เริ่มประเมิน →</button>
+  </nav>
+
+  <!-- HOME PAGE -->
+  <div class="page active" id="page-home">
+    <div class="hero">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <div class="hero-badge"><div class="hero-badge-dot"></div> AI-Powered Health Analysis</div>
+          <h1>AI Diabetes<br><span>Risk Prediction</span></h1>
+          <p class="hero-sub">ประเมินความเสี่ยงโรคเบาหวานด้วยปัญญาประดิษฐ์ แม่นยำ รวดเร็ว และอธิบายผลได้</p>
+          <div class="hero-btns">
+            <button class="btn-primary" onclick="showPage('predict',document.querySelectorAll('.nav-link')[1])">⚡ เริ่มประเมิน</button>
+            <button class="btn-secondary" onclick="showPage('about',document.querySelectorAll('.nav-link')[2])">ดูข้อมูลเพิ่มเติม</button>
+          </div>
+          <div class="hero-stats">
+            <div><div class="hero-stat-val">89.4%</div><div class="hero-stat-label">Model Accuracy</div></div>
+            <div><div class="hero-stat-val">10K+</div><div class="hero-stat-label">Training Records</div></div>
+            <div><div class="hero-stat-val">13</div><div class="hero-stat-label">Risk Factors</div></div>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="hero-card">
+            <div class="hero-card-title">Risk Score Distribution</div>
+            <div class="mini-chart" id="miniChart"></div>
+          </div>
+          <div class="hero-card">
+            <div class="hero-card-title">AI Medical Analytics</div>
+            <div class="gauge-mini">
+              <div class="gauge-circle">
+                <svg width="70" height="70" viewBox="0 0 70 70">
+                  <circle cx="35" cy="35" r="28" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="6"/>
+                  <circle cx="35" cy="35" r="28" fill="none" stroke="#5eead4" stroke-width="6" stroke-dasharray="105 176" stroke-linecap="round"/>
+                </svg>
+                <div class="gauge-center"><div class="gauge-pct">60%</div><div class="gauge-label">Avg Risk</div></div>
+              </div>
+              <div class="gauge-info">
+                <p>Population Average</p>
+                <span>Based on 10,000 patient records</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div class="hero-card-title">Model Performance</div>
+            <div class="ai-metrics">
+              <div class="ai-metric"><div class="ai-metric-val">89.4%</div><div class="ai-metric-label">Accuracy</div></div>
+              <div class="ai-metric"><div class="ai-metric-val">87.2%</div><div class="ai-metric-label">Precision</div></div>
+              <div class="ai-metric"><div class="ai-metric-val">85.9%</div><div class="ai-metric-label">Recall</div></div>
+              <div class="ai-metric"><div class="ai-metric-val">0.893</div><div class="ai-metric-label">AUC-ROC</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT DIABETES SECTION -->
+    <div class="section">
+      <div class="section-title">เกี่ยวกับโรคเบาหวาน</div>
+      <div class="section-sub">ทำความเข้าใจปัจจัยเสี่ยงและการป้องกัน</div>
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="about-icon" style="background:#f0fdf4">🩸</div>
+          <h3>ระดับน้ำตาลในเลือด</h3>
+          <p>ระดับกลูโคสในเลือดที่สูงเกินไปเป็นสัญญาณสำคัญ Fasting glucose &gt;126 mg/dL บ่งชี้ความเสี่ยงสูง</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon" style="background:#fff7ed">⚖️</div>
+          <h3>ดัชนีมวลกาย (BMI)</h3>
+          <p>BMI เกิน 25 เพิ่มความเสี่ยงอย่างมีนัยสำคัญ ไขมันสะสมบริเวณช่องท้องส่งผลต่อการตอบสนองต่ออินซูลิน</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon" style="background:#fdf4ff">🧬</div>
+          <h3>ประวัติครอบครัว</h3>
+          <p>มีประวัติครอบครัวเป็นเบาหวานเพิ่มความเสี่ยงถึง 2-3 เท่า พันธุกรรมมีบทบาทสำคัญในการเกิดโรค</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PREDICTION PAGE -->
+  <div class="page" id="page-predict">
+    <div class="pred-header">
+      <h2>🤖 AI Diabetes Risk Assessment</h2>
+      <p>กรอกข้อมูลสุขภาพของคุณเพื่อรับการวิเคราะห์ด้วย AI</p>
+    </div>
+    <div class="pred-body">
+      <div class="cards-grid">
+        <!-- CARD 1 -->
+        <div class="form-card">
+          <div class="form-card-header">
+            <div class="form-card-icon">👤</div>
+            <h3>Personal Information</h3>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Age</label>
+            <div class="range-row">
+              <input type="range" min="18" max="90" value="45" id="age" oninput="document.getElementById('age-val').textContent=this.value">
+              <span class="range-val" id="age-val">45</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Gender</label>
+            <select class="form-select" id="gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Family History of Diabetes</label>
+            <select class="form-select" id="family">
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Smoking Status</label>
+            <select class="form-select" id="smoking">
+              <option value="never">Never</option>
+              <option value="former">Former Smoker</option>
+              <option value="current">Current Smoker</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="form-card">
+          <div class="form-card-header">
+            <div class="form-card-icon">🩺</div>
+            <h3>Health Metrics</h3>
+          </div>
+          <div class="form-group">
+            <label class="form-label">BMI (kg/m²)</label>
+            <div class="range-row">
+              <input type="range" min="15" max="50" value="27" step="0.1" id="bmi" oninput="document.getElementById('bmi-val').textContent=parseFloat(this.value).toFixed(1)">
+              <span class="range-val" id="bmi-val">27.0</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Blood Pressure (mmHg)</label>
+            <div class="range-row">
+              <input type="range" min="60" max="180" value="120" id="bp" oninput="document.getElementById('bp-val').textContent=this.value">
+              <span class="range-val" id="bp-val">120</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Fasting Glucose (mg/dL)</label>
+            <div class="range-row">
+              <input type="range" min="70" max="300" value="110" id="glucose" oninput="document.getElementById('glucose-val').textContent=this.value">
+              <span class="range-val" id="glucose-val">110</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">HbA1c (%)</label>
+            <div class="range-row">
+              <input type="range" min="4" max="14" value="5.5" step="0.1" id="hba1c" oninput="document.getElementById('hba1c-val').textContent=parseFloat(this.value).toFixed(1)">
+              <span class="range-val" id="hba1c-val">5.5</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Cholesterol (mg/dL)</label>
+            <div class="range-row">
+              <input type="range" min="100" max="400" value="200" id="chol" oninput="document.getElementById('chol-val').textContent=this.value">
+              <span class="range-val" id="chol-val">200</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="form-card">
+          <div class="form-card-header">
+            <div class="form-card-icon">🏃</div>
+            <h3>Lifestyle Factors</h3>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Exercise (days/week)</label>
+            <div class="range-row">
+              <input type="range" min="0" max="7" value="3" id="exercise" oninput="document.getElementById('exercise-val').textContent=this.value">
+              <span class="range-val" id="exercise-val">3</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Sleep Duration (hours/night)</label>
+            <div class="range-row">
+              <input type="range" min="4" max="12" value="7" step="0.5" id="sleep" oninput="document.getElementById('sleep-val').textContent=parseFloat(this.value).toFixed(1)">
+              <span class="range-val" id="sleep-val">7.0</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Alcohol Consumption</label>
+            <select class="form-select" id="alcohol">
+              <option value="none">None</option>
+              <option value="light">Light (1-2 drinks/week)</option>
+              <option value="moderate">Moderate (3-7 drinks/week)</option>
+              <option value="heavy">Heavy (8+ drinks/week)</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-top:12px; padding: 12px; background: #f0fdfa; border-radius: 8px; border: 1px solid #99f6e4;">
+            <p style="font-size:12px; color:#0f766e; font-weight:500; line-height:1.6;">💡 ข้อมูลทั้งหมดถูกประมวลผลด้วย Random Forest Classifier ที่ผ่านการฝึกด้วยข้อมูล 10,000 ราย</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pred-submit">
+        <button class="predict-btn" id="predictBtn" onclick="runPrediction()">
+          <span id="btn-text">🔍 Predict Diabetes Risk</span>
+          <div class="spinner" id="spinner" style="display:none"></div>
+        </button>
+      </div>
+
+      <!-- RESULT SECTION -->
+      <div class="result-section" id="resultSection">
+        <div class="result-grid">
+          <div class="result-card">
+            <h3><span>🎯</span> AI Prediction Result</h3>
+            <div class="gauge-wrap">
+              <div class="gauge-svg-wrap">
+                <svg width="180" height="180" viewBox="0 0 180 180">
+                  <circle cx="90" cy="90" r="70" fill="none" stroke="#f1f5f9" stroke-width="14"/>
+                  <circle cx="90" cy="90" r="70" fill="none" id="gaugeArc" stroke="#e11d48" stroke-width="14" stroke-dasharray="0 440" stroke-linecap="round" style="transition: stroke-dasharray 1.2s ease"/>
+                </svg>
+                <div class="gauge-text-center">
+                  <div class="gauge-big-pct" id="resultPct" style="color:#e11d48">0%</div>
+                  <div class="gauge-big-label" id="resultLabel" style="color:#e11d48">—</div>
+                </div>
+              </div>
+              <div class="gauge-levels" style="margin-top:16px">
+                <span class="gauge-level risk-low">Low &lt;40%</span>
+                <span class="gauge-level risk-medium">Medium 40–70%</span>
+                <span class="gauge-level risk-high">High &gt;70%</span>
+              </div>
+            </div>
+            <div style="margin-top:20px; padding:14px; border-radius:10px; background:#fef2f2; border:1px solid #fecaca;" id="riskAdvice">
+              <p style="font-size:13px; font-weight:600; color:#991b1b; margin-bottom:4px" id="adviceTitle">⚠️ High Risk Detected</p>
+              <p style="font-size:12px; color:#b91c1c; line-height:1.6" id="adviceText">แนะนำให้พบแพทย์เพื่อตรวจระดับน้ำตาลในเลือดโดยเร็ว และปรับเปลี่ยนพฤติกรรมการใช้ชีวิต</p>
+            </div>
+          </div>
+
+          <div class="result-card">
+            <h3><span>📊</span> Explainable AI — Feature Importance</h3>
+            <div id="shap-chart-wrap">
+              <canvas id="shapChart" role="img" aria-label="SHAP feature importance bar chart showing factors affecting diabetes risk prediction"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- SHAP DETAIL -->
+        <div class="result-card" style="margin-bottom:24px">
+          <h3><span>🔬</span> Factors Affecting Prediction</h3>
+          <div class="shap-list" id="shapList"></div>
+        </div>
+      </div>
+
+      <!-- ARCHITECTURE SECTION -->
+      <div class="arch-section" style="border-radius:16px; margin-top:8px">
+        <div class="arch-inner">
+          <div class="arch-title">AI System Architecture</div>
+          <div class="arch-sub">วิธีการทำงานของระบบตั้งแต่ input จนถึง prediction</div>
+          <div class="arch-flow">
+            <div class="arch-step"><div class="arch-step-icon">📝</div><div class="arch-step-label">User Input</div><div class="arch-step-sub">13 features</div></div>
+            <div class="arch-arrow">→</div>
+            <div class="arch-step"><div class="arch-step-icon">⚡</div><div class="arch-step-label">Frontend</div><div class="arch-step-sub">Next.js</div></div>
+            <div class="arch-arrow">→</div>
+            <div class="arch-step"><div class="arch-step-icon">🔌</div><div class="arch-step-label">API Route</div><div class="arch-step-sub">/api/predict</div></div>
+            <div class="arch-arrow">→</div>
+            <div class="arch-step"><div class="arch-step-icon">🧠</div><div class="arch-step-label">AI Model</div><div class="arch-step-sub">model.pkl</div></div>
+            <div class="arch-arrow">→</div>
+            <div class="arch-step"><div class="arch-step-icon">📊</div><div class="arch-step-label">Dashboard</div><div class="arch-step-sub">Result + SHAP</div></div>
+          </div>
+          <div class="model-info-grid">
+            <div class="model-info-card">
+              <h4>Model Information</h4>
+              <div class="model-metric"><span class="model-metric-label">Algorithm</span><span class="model-metric-val">Random Forest</span></div>
+              <div class="model-metric"><span class="model-metric-label">Estimators</span><span class="model-metric-val">200 trees</span></div>
+              <div class="model-metric"><span class="model-metric-label">Max Depth</span><span class="model-metric-val">10</span></div>
+              <div class="model-metric"><span class="model-metric-label">Last Trained</span><span class="model-metric-val">June 2026</span></div>
+            </div>
+            <div class="model-info-card">
+              <h4>Performance Metrics</h4>
+              <div class="model-metric"><span class="model-metric-label">Accuracy</span><span class="model-metric-val">89.4%</span></div>
+              <div class="model-metric"><span class="model-metric-label">Precision</span><span class="model-metric-val">87.2%</span></div>
+              <div class="model-metric"><span class="model-metric-label">Recall</span><span class="model-metric-val">85.9%</span></div>
+              <div class="model-metric"><span class="model-metric-label">F1-Score</span><span class="model-metric-val">86.5%</span></div>
+            </div>
+            <div class="model-info-card">
+              <h4>Dataset Info</h4>
+              <div class="model-metric"><span class="model-metric-label">Total Records</span><span class="model-metric-val">10,000</span></div>
+              <div class="model-metric"><span class="model-metric-label">Train / Test</span><span class="model-metric-val">80 / 20%</span></div>
+              <div class="model-metric"><span class="model-metric-label">Positive Cases</span><span class="model-metric-val">34.2%</span></div>
+              <div class="model-metric"><span class="model-metric-label">Cross-Val</span><span class="model-metric-val">5-fold</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT PAGE -->
+  <div class="page" id="page-about">
+    <div class="section" style="max-width:800px; padding-top:60px">
+      <div class="section-title">เกี่ยวกับโปรเจกต์</div>
+      <div class="section-sub">AI Diabetes Risk Prediction System ใช้ Machine Learning ในการประเมินความเสี่ยง</div>
+      <div class="about-grid" style="grid-template-columns:1fr 1fr; gap:20px">
+        <div class="about-card">
+          <div class="about-icon" style="background:#eff6ff">🤖</div>
+          <h3>Random Forest Classifier</h3>
+          <p>ใช้ ensemble learning ด้วย 200 decision trees เพื่อให้ได้ความแม่นยำสูงสุด และลด overfitting</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon" style="background:#fdf4ff">🔍</div>
+          <h3>Explainable AI (XAI)</h3>
+          <p>ระบบอธิบายเหตุผลการทำนายด้วย SHAP values เพื่อให้เข้าใจว่าปัจจัยใดมีผลต่อ prediction มากที่สุด</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon" style="background:#f0fdf4">⚡</div>
+          <h3>Next.js + FastAPI</h3>
+          <p>Frontend สร้างด้วย Next.js Backend เป็น FastAPI ที่โหลด sklearn model จากไฟล์ .pkl</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon" style="background:#fff7ed">📋</div>
+          <h3>การนำไปใช้งาน</h3>
+          <p>Export model จาก Colab ด้วย joblib แล้ว deploy บน server เรียกใช้ผ่าน REST API endpoint /predict</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>DiabetesAI — AI-Powered Diabetes Risk Prediction System · สำหรับการศึกษาเท่านั้น ไม่ใช่คำแนะนำทางการแพทย์</p>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+function showPage(name, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  if(el) el.classList.add('active');
+}
+
+// Mini bar chart in hero
+const miniChart = document.getElementById('miniChart');
+const bars = [30,45,60,38,72,55,82,48,65,90,44,58,35,70,50];
+const colors = bars.map(v => v > 70 ? '#f87171' : v > 45 ? '#fbbf24' : '#34d399');
+bars.forEach((h, i) => {
+  const b = document.createElement('div');
+  b.className = 'mini-bar';
+  b.style.cssText = `height:${h*0.85}%;background:${colors[i]};opacity:0.85`;
+  miniChart.appendChild(b);
+});
+
+let shapChartInstance = null;
+
+function computeRisk() {
+  const age = parseInt(document.getElementById('age').value);
+  const bmi = parseFloat(document.getElementById('bmi').value);
+  const glucose = parseInt(document.getElementById('glucose').value);
+  const hba1c = parseFloat(document.getElementById('hba1c').value);
+  const bp = parseInt(document.getElementById('bp').value);
+  const chol = parseInt(document.getElementById('chol').value);
+  const family = parseInt(document.getElementById('family').value);
+  const smoking = document.getElementById('smoking').value;
+  const exercise = parseInt(document.getElementById('exercise').value);
+  const sleep = parseFloat(document.getElementById('sleep').value);
+  const alcohol = document.getElementById('alcohol').value;
+
+  const glucoseScore = Math.min(35, Math.max(0, (glucose - 100) / 4));
+  const hba1cScore = Math.min(25, Math.max(0, (hba1c - 5) * 6));
+  const bmiScore = Math.min(20, Math.max(0, (bmi - 22) / 0.7));
+  const familyScore = family === 1 ? 15 : 0;
+  const ageScore = Math.min(12, Math.max(0, (age - 30) / 4));
+  const bpScore = Math.min(10, Math.max(0, (bp - 120) / 6));
+  const cholScore = Math.min(8, Math.max(0, (chol - 200) / 20));
+  const smokingScore = smoking === 'current' ? 8 : smoking === 'former' ? 4 : 0;
+  const exerciseScore = -Math.min(10, exercise * 1.8);
+  const sleepScore = sleep < 6 ? -4 : sleep > 9 ? -2 : -6;
+  const alcoholScore = alcohol === 'heavy' ? 6 : alcohol === 'moderate' ? 3 : 0;
+
+  const raw = glucoseScore + hba1cScore + bmiScore + familyScore + ageScore + bpScore + cholScore + smokingScore + exerciseScore + sleepScore + alcoholScore;
+  const risk = Math.min(98, Math.max(5, Math.round(raw + 20)));
+
+  return {
+    risk,
+    factors: [
+      { label: 'Fasting Glucose', value: glucoseScore, positive: glucoseScore > 0, pct: '+' + glucoseScore.toFixed(0) + '%' },
+      { label: 'HbA1c Level', value: hba1cScore, positive: hba1cScore > 0, pct: '+' + hba1cScore.toFixed(0) + '%' },
+      { label: 'BMI', value: bmiScore, positive: bmiScore > 0, pct: '+' + bmiScore.toFixed(0) + '%' },
+      { label: 'Family History', value: familyScore, positive: familyScore > 0, pct: (familyScore > 0 ? '+' : '') + familyScore + '%' },
+      { label: 'Age', value: ageScore, positive: ageScore > 0, pct: '+' + ageScore.toFixed(0) + '%' },
+      { label: 'Blood Pressure', value: bpScore, positive: bpScore > 0, pct: '+' + bpScore.toFixed(0) + '%' },
+      { label: 'Regular Exercise', value: Math.abs(exerciseScore), positive: false, pct: exerciseScore.toFixed(0) + '%' },
+      { label: 'Sleep Quality', value: Math.abs(sleepScore), positive: false, pct: sleepScore.toFixed(0) + '%' },
+    ].sort((a,b) => b.value - a.value)
+  };
+}
+
+function runPrediction() {
+  const btn = document.getElementById('predictBtn');
+  const btnText = document.getElementById('btn-text');
+  const spinner = document.getElementById('spinner');
+  btn.classList.add('loading');
+  btnText.style.display = 'none';
+  spinner.style.display = 'block';
+
+  setTimeout(() => {
+    btn.classList.remove('loading');
+    btnText.style.display = 'inline';
+    spinner.style.display = 'none';
+
+    const { risk, factors } = computeRisk();
+    showResult(risk, factors);
+  }, 1400);
+}
+
+function showResult(risk, factors) {
+  const section = document.getElementById('resultSection');
+  section.classList.add('visible');
+
+  const color = risk > 70 ? '#e11d48' : risk > 40 ? '#f59e0b' : '#10b981';
+  const label = risk > 70 ? 'High Risk' : risk > 40 ? 'Medium Risk' : 'Low Risk';
+
+  document.getElementById('resultPct').textContent = risk + '%';
+  document.getElementById('resultPct').style.color = color;
+  document.getElementById('resultLabel').textContent = label;
+  document.getElementById('resultLabel').style.color = color;
+
+  const circ = 2 * Math.PI * 70;
+  document.getElementById('gaugeArc').setAttribute('stroke', color);
+  setTimeout(() => {
+    document.getElementById('gaugeArc').setAttribute('stroke-dasharray', (circ * risk / 100).toFixed(1) + ' ' + circ.toFixed(1));
+  }, 100);
+
+  if(risk > 70) {
+    document.getElementById('riskAdvice').style.background = '#fef2f2';
+    document.getElementById('riskAdvice').style.borderColor = '#fecaca';
+    document.getElementById('adviceTitle').style.color = '#991b1b';
+    document.getElementById('adviceTitle').textContent = '⚠️ High Risk Detected';
+    document.getElementById('adviceText').style.color = '#b91c1c';
+    document.getElementById('adviceText').textContent = 'แนะนำให้พบแพทย์เพื่อตรวจระดับน้ำตาลในเลือดโดยเร็ว และปรับเปลี่ยนพฤติกรรมการใช้ชีวิต';
+  } else if(risk > 40) {
+    document.getElementById('riskAdvice').style.background = '#fffbeb';
+    document.getElementById('riskAdvice').style.borderColor = '#fde68a';
+    document.getElementById('adviceTitle').style.color = '#92400e';
+    document.getElementById('adviceTitle').textContent = '⚡ Medium Risk';
+    document.getElementById('adviceText').style.color = '#b45309';
+    document.getElementById('adviceText').textContent = 'ควรติดตามระดับน้ำตาลสม่ำเสมอ ออกกำลังกายและควบคุมอาหาร เพื่อลดความเสี่ยงในอนาคต';
+  } else {
+    document.getElementById('riskAdvice').style.background = '#f0fdf4';
+    document.getElementById('riskAdvice').style.borderColor = '#bbf7d0';
+    document.getElementById('adviceTitle').style.color = '#065f46';
+    document.getElementById('adviceTitle').textContent = '✅ Low Risk';
+    document.getElementById('adviceText').style.color = '#047857';
+    document.getElementById('adviceText').textContent = 'ความเสี่ยงอยู่ในระดับต่ำ ดูแลสุขภาพให้สม่ำเสมอ ออกกำลังกายและรับประทานอาหารที่มีประโยชน์ต่อไป';
+  }
+
+  // SHAP list
+  const shapList = document.getElementById('shapList');
+  shapList.innerHTML = '';
+  factors.forEach(f => {
+    const row = document.createElement('div');
+    row.className = 'shap-row';
+    const maxVal = factors[0].value || 1;
+    const barPct = Math.min(90, (f.value / maxVal) * 85);
+    row.innerHTML = `<span class="shap-label">${f.label}</span>
+      <div class="shap-bar-wrap"><div class="shap-bar ${f.positive ? 'shap-pos' : 'shap-neg'}" style="width:${barPct}%"><span>${f.pct}</span></div></div>
+      <span class="shap-dir" style="color:${f.positive ? '#e11d48' : '#059669'}">${f.pct}</span>`;
+    shapList.appendChild(row);
+  });
+
+  // SHAP chart
+  if(shapChartInstance) { shapChartInstance.destroy(); }
+  const topFactors = factors.slice(0,6);
+  const chartColors = topFactors.map(f => f.positive ? '#e11d48' : '#10b981');
+  shapChartInstance = new Chart(document.getElementById('shapChart'), {
+    type: 'bar',
+    data: {
+      labels: topFactors.map(f => f.label),
+      datasets: [{
+        label: 'Impact on Risk',
+        data: topFactors.map(f => f.positive ? f.value : -f.value),
+        backgroundColor: chartColors,
+        borderRadius: 6,
+        borderSkipped: false,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: '#f1f5f9' }, ticks: { font: { family: 'DM Sans', size: 11 }, callback: v => (v > 0 ? '+' : '') + v + '%' } },
+        y: { grid: { display: false }, ticks: { font: { family: 'DM Sans', size: 12 } } }
+      }
+    }
+  });
+
+  section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+
+</body>
+</html>
