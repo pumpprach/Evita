@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Evita - AI Diabetes Risk Prediction</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,22 +18,21 @@
     <button class="nav-cta" onclick="showPage('predict',document.querySelectorAll('.nav-link')[1])">เริ่มประเมิน →</button>
   </nav>
 
-  <!-- HOME PAGE -->
   <div class="page active" id="page-home">
     <div class="hero">
       <div class="hero-inner">
         <div class="hero-left">
           <div class="hero-badge"><div class="hero-badge-dot"></div> AI-Powered Health Analysis</div>
           <h1>AI Diabetes<br><span>Risk Prediction</span></h1>
-          <p class="hero-sub">ประเมินความเสี่ยงโรคเบาหวานด้วยปัญญาประดิษฐ์ แม่นยำ รวดเร็ว และอธิบายผลได้</p>
+          <p class="hero-sub">ประเมินความเสี่ยงโรคเบาหวานด้วยปัญญาประดิษฐ์ XGBoost ร่วมกับ Qwen LLM รวดเร็ว และอธิบายผลได้</p>
           <div class="hero-btns">
             <button class="btn-primary" onclick="showPage('predict',document.querySelectorAll('.nav-link')[1])">⚡ เริ่มประเมิน</button>
             <button class="btn-secondary" onclick="showPage('about',document.querySelectorAll('.nav-link')[2])">ดูข้อมูลเพิ่มเติม</button>
           </div>
           <div class="hero-stats">
-            <div><div class="hero-stat-val">89.4%</div><div class="hero-stat-label">Model Accuracy</div></div>
-            <div><div class="hero-stat-val">10K+</div><div class="hero-stat-label">Training Records</div></div>
-            <div><div class="hero-stat-val">13</div><div class="hero-stat-label">Risk Factors</div></div>
+            <div><div class="hero-stat-val">XGBoost</div><div class="hero-stat-label">Core Model</div></div>
+            <div><div class="hero-stat-val">Qwen</div><div class="hero-stat-label">LLM Extractor</div></div>
+            <div><div class="hero-stat-val">SHAP</div><div class="hero-stat-label">Explainable AI</div></div>
           </div>
         </div>
         <div class="hero-right">
@@ -53,55 +52,43 @@
               </div>
               <div class="gauge-info">
                 <p>Population Average</p>
-                <span>Based on 10,000 patient records</span>
+                <span>Based on overall patient records</span>
               </div>
-            </div>
-          </div>
-          <div class="hero-card">
-            <div class="hero-card-title">Model Performance</div>
-            <div class="ai-metrics">
-              <div class="ai-metric"><div class="ai-metric-val">89.4%</div><div class="ai-metric-label">Accuracy</div></div>
-              <div class="ai-metric"><div class="ai-metric-val">87.2%</div><div class="ai-metric-label">Precision</div></div>
-              <div class="ai-metric"><div class="ai-metric-val">85.9%</div><div class="ai-metric-label">Recall</div></div>
-              <div class="ai-metric"><div class="ai-metric-val">0.893</div><div class="ai-metric-label">AUC-ROC</div></div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ABOUT DIABETES SECTION -->
     <div class="section">
-      <div class="section-title">เกี่ยวกับโรคเบาหวาน</div>
-      <div class="section-sub">ทำความเข้าใจปัจจัยเสี่ยงและการป้องกัน</div>
+      <div class="section-title">เกี่ยวกับปัจจัยเสี่ยงสุขภาพ</div>
+      <div class="section-sub">ทำความเข้าใจปัจจัยที่โมเดลนำมาใช้ประเมิน</div>
       <div class="about-grid">
         <div class="about-card">
           <div class="about-icon" style="background:#f0fdf4">🩸</div>
           <h3>ระดับน้ำตาลในเลือด</h3>
-          <p>ระดับกลูโคสในเลือดที่สูงเกินไปเป็นสัญญาณสำคัญ Fasting glucose &gt;126 mg/dL บ่งชี้ความเสี่ยงสูง</p>
-        </div>
-        <div class="about-card">
-          <div class="about-icon" style="background:#fff7ed">⚖️</div>
-          <h3>ดัชนีมวลกาย (BMI)</h3>
-          <p>BMI เกิน 25 เพิ่มความเสี่ยงอย่างมีนัยสำคัญ ไขมันสะสมบริเวณช่องท้องส่งผลต่อการตอบสนองต่ออินซูลิน</p>
+          <p>ระดับกลูโคสในเลือดที่สูงเกินไปเป็นสัญญาณสำคัญ อาการแสดงบ่งชี้ความเสี่ยงสูง</p>
         </div>
         <div class="about-card">
           <div class="about-icon" style="background:#fdf4ff">🧬</div>
           <h3>ประวัติครอบครัว</h3>
           <p>มีประวัติครอบครัวเป็นเบาหวานเพิ่มความเสี่ยงถึง 2-3 เท่า พันธุกรรมมีบทบาทสำคัญในการเกิดโรค</p>
         </div>
+        <div class="about-card">
+          <div class="about-icon" style="background:#fff7ed">🛌</div>
+          <h3>พฤติกรรมการนอนหลับ</h3>
+          <p>คุณภาพการนอนหลับ ความสม่ำเสมอ และอัตราการเต้นของหัวใจขณะพัก ล้วนส่งผลต่อระบบเผาผลาญ</p>
+        </div>
       </div>
     </div>
   </div>
-  <!-- PREDICTION PAGE -->
   <div class="page" id="page-predict">
     <div class="pred-header">
-      <h2>🤖 AI Diabetes Risk Assessment</h2>
-      <p>กรอกข้อมูลสุขภาพของคุณเพื่อรับการวิเคราะห์ด้วย AI</p>
+      <h2>🤖 Evita - AI Diabetes Risk Assessment</h2>
+      <p>กรอกข้อมูลสุขภาพของคุณเพื่อรับการวิเคราะห์ด้วย AI (XGBoost + Qwen LLM)</p>
     </div>
     <div class="pred-body">
       <div class="cards-grid">
-        <!-- CARD 1 -->
         <div class="form-card">
           <div class="form-card-header">
             <div class="form-card-icon">👤</div>
@@ -110,7 +97,7 @@
           <div class="form-group">
             <label class="form-label">Age</label>
             <div class="range-row">
-              <input type="number" class="form-input" id="age">
+              <input type="number" class="form-input" id="age" value="24">
               <span class="range-val" id="age-val"></span>
             </div>
           </div>
@@ -123,7 +110,6 @@
           </div>
         </div>
 
-        <!-- CARD 2 -->
         <div class="form-card">
           <div class="form-card-header">
             <div class="form-card-icon">🩺</div>
@@ -132,7 +118,7 @@
           <div class="form-group">
             <label class="form-label">Resting Heart Rate</label>
             <div class="range-row">
-              <input type="number" class="form-input" id="rhr">
+              <input type="number" class="form-input" id="rhr" value="80">
             </div>
           </div>
           <div class="form-group">
@@ -150,22 +136,21 @@
           <div class="form-group">
             <label class="form-label">Sleep Duration (hrs)</label>
             <div class="range-row">
-              <input type="number" class="form-input" id="sleepDuration" >
+              <input type="number" class="form-input" id="sleepDuration" value="8">
             </div>
           </div>
           <div class="form-group">
             <label class="form-label">Sleep Efficiency (%)</label>
             <div class="range-row">
-              <input type="number" class="form-input" id="sleepEfficiency">
+              <input type="number" class="form-input" id="sleepEfficiency" value="80">
             </div>
           </div>
             <div class="form-group">
               <label class="form-label">Sleep Regularity Index</label>
-              <input type="number" class="form-input" id="sleepRegularity">
+              <input type="number" class="form-input" id="sleepRegularity" value="80">
             </div>
         </div>
 
-        <!-- CARD 3 -->
         <div class="form-card">
           <div class="form-card-header">
             <div class="form-card-icon">🏃</div>
@@ -174,22 +159,22 @@
           <div class="form-group">
             <label class="form-label">Total_Daily_Steps</label>
             <div class="range-row">
-              <input type="number" class="form-input" id="steps">
+              <input type="number" class="form-input" id="steps" value="8000">
             </div>
           </div>
           <div class="form-group">
             <label class="form-label">Sedentary Hours</label>
             <div class="range-row">
-              <input type="number" class="form-input" id="sedentary">
+              <input type="number" class="form-input" id="sedentary" value="2">
             </div>
           </div>
           <div class="form-group">
             <label class="form-label">Clinical Notes</label>
 
-            <textarea id="clinicalNotes" rows="6" class="form-textarea">มีโรคอ้วน ความดันโลหิตสูง ไขมันพอกตับ ประวัติครอบครัวเป็นเบาหวาน และไม่ออกกำลังกาย</textarea>
+            <textarea id="clinicalNotes" rows="6" class="form-textarea">มีโรคอ้วน ความดันโลหิตสูง ไขมันพอกตับ ประวัติครอบครัวเป็นเบาหวาน และไม่ออกกำลังกาย สูบบุหรี่</textarea>
           </div>
           <div class="form-group" style="margin-top:12px; padding: 12px; background: #f0fdfa; border-radius: 8px; border: 1px solid #99f6e4;">
-            <p style="font-size:12px; color:#0f766e; font-weight:500; line-height:1.6;">💡 ข้อมูลทั้งหมดถูกประมวลผลด้วย Random Forest Classifier ที่ผ่านการฝึกด้วยข้อมูล 10,000 ราย</p>
+            <p style="font-size:12px; color:#0f766e; font-weight:500; line-height:1.6;">💡 ข้อมูลข้อความจะถูกสกัดฟีเจอร์ด้วย Qwen LLM ก่อนส่งไปประมวลผลความเสี่ยงด้วยโมเดล XGBoost</p>
           </div>
         </div>
       </div>
@@ -201,7 +186,6 @@
         </button>
       </div>
 
-      <!-- RESULT SECTION -->
       <div class="result-section" id="resultSection">
         <div class="result-grid">
           <div class="result-card">
@@ -237,89 +221,44 @@
           </div>
         </div>
 
-        <!-- SHAP DETAIL -->
         <div class="result-card" style="margin-bottom:24px">
           <h3><span>🔬</span> Factors Affecting Prediction</h3>
           <div class="shap-list" id="shapList"></div>
         </div>
       </div>
-
-      <!-- ARCHITECTURE SECTION -->
-      <div class="arch-section" style="border-radius:16px; margin-top:8px">
-        <div class="arch-inner">
-          <div class="arch-title">AI System Architecture</div>
-          <div class="arch-sub">วิธีการทำงานของระบบตั้งแต่ input จนถึง prediction</div>
-          <div class="arch-flow">
-            <div class="arch-step"><div class="arch-step-icon">📝</div><div class="arch-step-label">User Input</div><div class="arch-step-sub">13 features</div></div>
-            <div class="arch-arrow">→</div>
-            <div class="arch-step"><div class="arch-step-icon">⚡</div><div class="arch-step-label">Frontend</div><div class="arch-step-sub">Next.js</div></div>
-            <div class="arch-arrow">→</div>
-            <div class="arch-step"><div class="arch-step-icon">🔌</div><div class="arch-step-label">API Route</div><div class="arch-step-sub">/api/predict</div></div>
-            <div class="arch-arrow">→</div>
-            <div class="arch-step"><div class="arch-step-icon">🧠</div><div class="arch-step-label">AI Model</div><div class="arch-step-sub">model.pkl</div></div>
-            <div class="arch-arrow">→</div>
-            <div class="arch-step"><div class="arch-step-icon">📊</div><div class="arch-step-label">Dashboard</div><div class="arch-step-sub">Result + SHAP</div></div>
-          </div>
-          <div class="model-info-grid">
-            <div class="model-info-card">
-              <h4>Model Information</h4>
-              <div class="model-metric"><span class="model-metric-label">Algorithm</span><span class="model-metric-val">Random Forest</span></div>
-              <div class="model-metric"><span class="model-metric-label">Estimators</span><span class="model-metric-val">200 trees</span></div>
-              <div class="model-metric"><span class="model-metric-label">Max Depth</span><span class="model-metric-val">10</span></div>
-              <div class="model-metric"><span class="model-metric-label">Last Trained</span><span class="model-metric-val">June 2026</span></div>
-            </div>
-            <div class="model-info-card">
-              <h4>Performance Metrics</h4>
-              <div class="model-metric"><span class="model-metric-label">Accuracy</span><span class="model-metric-val">89.4%</span></div>
-              <div class="model-metric"><span class="model-metric-label">Precision</span><span class="model-metric-val">87.2%</span></div>
-              <div class="model-metric"><span class="model-metric-label">Recall</span><span class="model-metric-val">85.9%</span></div>
-              <div class="model-metric"><span class="model-metric-label">F1-Score</span><span class="model-metric-val">86.5%</span></div>
-            </div>
-            <div class="model-info-card">
-              <h4>Dataset Info</h4>
-              <div class="model-metric"><span class="model-metric-label">Total Records</span><span class="model-metric-val">10,000</span></div>
-              <div class="model-metric"><span class="model-metric-label">Train / Test</span><span class="model-metric-val">80 / 20%</span></div>
-              <div class="model-metric"><span class="model-metric-label">Positive Cases</span><span class="model-metric-val">34.2%</span></div>
-              <div class="model-metric"><span class="model-metric-label">Cross-Val</span><span class="model-metric-val">5-fold</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 
-  <!-- ABOUT PAGE -->
   <div class="page" id="page-about">
     <div class="section" style="max-width:800px; padding-top:60px">
-      <div class="section-title">เกี่ยวกับโปรเจกต์</div>
-      <div class="section-sub">AI Diabetes Risk Prediction System ใช้ Machine Learning ในการประเมินความเสี่ยง</div>
+      <div class="section-title">เกี่ยวกับโมเดลของเรา</div>
+      <div class="section-sub">ทำงานร่วมกันระหว่าง Machine Learning และ Large Language Model</div>
       <div class="about-grid" style="grid-template-columns:1fr 1fr; gap:20px">
+        
         <div class="about-card">
           <div class="about-icon" style="background:#eff6ff">🤖</div>
-          <h3>Random Forest Classifier</h3>
-          <p>ใช้ ensemble learning ด้วย 200 decision trees เพื่อให้ได้ความแม่นยำสูงสุด และลด overfitting</p>
+          <h3>XGBoost Classifier</h3>
+          <p>ใช้โมเดลระดับแนวหน้าอย่าง Gradient Boosting ในการเรียนรู้และประเมินความเสี่ยงจากข้อมูลตัวเลขด้านสุขภาพ เพื่อให้การทำนายเชื่อถือได้ที่สุด</p>
         </div>
+
+        <div class="about-card">
+          <div class="about-icon" style="background:#fff7ed">🧠</div>
+          <h3>Qwen LLM</h3>
+          <p>ระบบนำ Qwen LLM เข้ามาวิเคราะห์บันทึกทางการแพทย์ (Clinical Notes) ที่เป็นข้อความ เพื่อสกัดปัจจัยเสี่ยงที่ซ่อนอยู่ส่งต่อให้ XGBoost ทำงาน</p>
+        </div>
+
         <div class="about-card">
           <div class="about-icon" style="background:#fdf4ff">🔍</div>
           <h3>Explainable AI (XAI)</h3>
-          <p>ระบบอธิบายเหตุผลการทำนายด้วย SHAP values เพื่อให้เข้าใจว่าปัจจัยใดมีผลต่อ prediction มากที่สุด</p>
+          <p>ใช้เทคนิค SHAP (SHapley Additive exPlanations) อธิบายเหตุผลการตัดสินใจของ AI ทำให้ผู้ใช้เข้าใจว่าพฤติกรรมใดควรปรับปรุง</p>
         </div>
-        <div class="about-card">
-          <div class="about-icon" style="background:#f0fdf4">⚡</div>
-          <h3>Next.js + FastAPI</h3>
-          <p>Frontend สร้างด้วย Next.js Backend เป็น FastAPI ที่โหลด sklearn model จากไฟล์ .pkl</p>
-        </div>
-        <div class="about-card">
-          <div class="about-icon" style="background:#fff7ed">📋</div>
-          <h3>การนำไปใช้งาน</h3>
-          <p>Export model จาก Colab ด้วย joblib แล้ว deploy บน server เรียกใช้ผ่าน REST API endpoint /predict</p>
-        </div>
+
       </div>
     </div>
   </div>
 
   <footer>
-    <p>DiabetesAI — AI-Powered Diabetes Risk Prediction System · สำหรับการศึกษาเท่านั้น ไม่ใช่คำแนะนำทางการแพทย์</p>
+    <p>Evita — AI-Powered Diabetes Risk Prediction System</p>
   </footer>
 </div>
 </div>
@@ -347,7 +286,6 @@ bars.forEach((h, i) => {
 let shapChartInstance = null;
 
 async function runPrediction() {
-
   const btn = document.getElementById('predictBtn');
   const btnText = document.getElementById('btn-text');
   const spinner = document.getElementById('spinner');
@@ -357,80 +295,77 @@ async function runPrediction() {
   spinner.style.display = 'block';
 
   try {
+    const genderStr = document.getElementById('gender').value;
+    const genderMap = { "male": 1, "female": 0 };
+    const genderVal = genderMap[genderStr] !== undefined ? genderMap[genderStr] : 1; 
 
     const payload = {
       Patient_ID: "WEB_USER",
-
-      Age: parseInt(document.getElementById('age').value),
-      Gender: parseInt(document.getElementById('gender').value),
-
-      Resting_HR: parseFloat(document.getElementById('rhr').value),
-      Sleep_HRV_Avg: parseFloat(document.getElementById('hrv').value),
-
-      Daily_Spot_SpO2: parseFloat(document.getElementById('spo2').value),
-
-      Sleep_Duration: parseFloat(
-        document.getElementById('sleepDuration').value
-      ),
-
-      Sleep_Efficiency: parseFloat(
-        document.getElementById('sleepEfficiency').value
-      ),
-
-      Sleep_Regularity_Index: parseFloat(
-        document.getElementById('sleepRegularity').value
-      ),
-
-      Total_Daily_Steps: parseInt(
-        document.getElementById('steps').value
-      ),
-
-      Sedentary_Hours: parseFloat(
-        document.getElementById('sedentary').value
-      ),
-
-      Clinical_Notes:
-        document.getElementById('clinicalNotes').value
+      Age: parseInt(document.getElementById('age').value) || 0,
+      Gender: genderVal,
+      Resting_HR: parseFloat(document.getElementById('rhr').value) || 0,
+      Sleep_HRV_Avg: parseFloat(document.getElementById('hrv').value) || 0,
+      Daily_Spot_SpO2: parseFloat(document.getElementById('spo2').value) || 0,
+      Sleep_Duration: parseFloat(document.getElementById('sleepDuration').value) || 0,
+      Sleep_Efficiency: parseFloat(document.getElementById('sleepEfficiency').value) || 0,
+      Sleep_Regularity_Index: parseFloat(document.getElementById('sleepRegularity').value) || 0,
+      Total_Daily_Steps: parseInt(document.getElementById('steps').value) || 0,
+      Sedentary_Hours: parseFloat(document.getElementById('sedentary').value) || 0,
+      Clinical_Notes: document.getElementById('clinicalNotes').value
     };
 
-    const response = await fetch(
-      "http://localhost:8000/predict",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-      }
-    );
+    const response = await fetch("http://localhost:8000/predict", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      const errorDetail = await response.text();
+      throw new Error(`Server Error (${response.status}): ${errorDetail}`);
+    }
 
     const result = await response.json();
-
-    console.log(result);
+    console.log("API Response:", result);
 
     showResult(
       result.risk_score,
-      result.top_factors || []
+      result.top_factors || [],
+      result.recommendation 
     );
 
   } catch(err) {
-
     console.error(err);
-    alert("Prediction failed");
-
+    alert(`Prediction failed: ${err.message}`);
   } finally {
-
     btn.disabled = false;
     btnText.style.display = 'inline';
     spinner.style.display = 'none';
-
   }
 }
 
-function showResult(risk, factors) {
+const featureDictionary = {
+  "Resting_Heart_Rate": "อัตราการเต้นของหัวใจขณะพัก",
+  "Sleep_HRV_Avg": "ค่าเฉลี่ย HRV",
+  "Daily_Spot_SpO2": "ระดับออกซิเจนในเลือด",
+  "Sleep_Duration": "ระยะเวลาการนอนหลับ",
+  "Sleep_Efficiency": "ประสิทธิภาพการนอนหลับ",
+  "Sleep_Regularity_Index": "ความสม่ำเสมอในการนอน",
+  "Total_Daily_Steps": "จำนวนก้าวเดิน",
+  "Sedentary_Hours": "ชั่วโมงเนือยนิ่ง",
+  "Age": "อายุ",
+  "Gender": "เพศ",
+  "Obesity": "ภาวะโรคอ้วน",
+  "Hypertension": "ความดันโลหิตสูง",
+  "Family_Diabetes": "มีญาติป่วยเป็นเบาหวาน",
+  "Smoker": "สูบบุหรี่"
+};
+
+function showResult(risk, rawFactors, recommendationText) {
   const section = document.getElementById('resultSection');
   section.classList.add('visible');
 
+  // --- 1. อัปเดตส่วนคะแนนและสี ---
   const color = risk > 70 ? '#e11d48' : risk > 40 ? '#f59e0b' : '#10b981';
   const label = risk > 70 ? 'High Risk' : risk > 40 ? 'Medium Risk' : 'Low Risk';
 
@@ -445,47 +380,67 @@ function showResult(risk, factors) {
     document.getElementById('gaugeArc').setAttribute('stroke-dasharray', (circ * risk / 100).toFixed(1) + ' ' + circ.toFixed(1));
   }, 100);
 
+  // --- 2. อัปเดตคำแนะนำ (ใช้จาก Backend ถ้ามี) ---
   if(risk > 70) {
     document.getElementById('riskAdvice').style.background = '#fef2f2';
     document.getElementById('riskAdvice').style.borderColor = '#fecaca';
     document.getElementById('adviceTitle').style.color = '#991b1b';
     document.getElementById('adviceTitle').textContent = '⚠️ High Risk Detected';
     document.getElementById('adviceText').style.color = '#b91c1c';
-    document.getElementById('adviceText').textContent = 'แนะนำให้พบแพทย์เพื่อตรวจระดับน้ำตาลในเลือดโดยเร็ว และปรับเปลี่ยนพฤติกรรมการใช้ชีวิต';
   } else if(risk > 40) {
     document.getElementById('riskAdvice').style.background = '#fffbeb';
     document.getElementById('riskAdvice').style.borderColor = '#fde68a';
     document.getElementById('adviceTitle').style.color = '#92400e';
     document.getElementById('adviceTitle').textContent = '⚡ Medium Risk';
     document.getElementById('adviceText').style.color = '#b45309';
-    document.getElementById('adviceText').textContent = 'ควรติดตามระดับน้ำตาลสม่ำเสมอ ออกกำลังกายและควบคุมอาหาร เพื่อลดความเสี่ยงในอนาคต';
   } else {
     document.getElementById('riskAdvice').style.background = '#f0fdf4';
     document.getElementById('riskAdvice').style.borderColor = '#bbf7d0';
     document.getElementById('adviceTitle').style.color = '#065f46';
     document.getElementById('adviceTitle').textContent = '✅ Low Risk';
     document.getElementById('adviceText').style.color = '#047857';
-    document.getElementById('adviceText').textContent = 'ความเสี่ยงอยู่ในระดับต่ำ ดูแลสุขภาพให้สม่ำเสมอ ออกกำลังกายและรับประทานอาหารที่มีประโยชน์ต่อไป';
+  }
+  
+  if (recommendationText) {
+      document.getElementById('adviceText').textContent = recommendationText;
   }
 
-  // SHAP list
-  const shapList = document.getElementById('shapList');
-  shapList.innerHTML = '';
-  factors.forEach(f => {
-    const row = document.createElement('div');
-    row.className = 'shap-row';
-    const maxVal = factors[0].value || 1;
-    const barPct = Math.min(90, (f.value / maxVal) * 85);
-    row.innerHTML = `<span class="shap-label">${f.label}</span>
-      <div class="shap-bar-wrap"><div class="shap-bar ${f.positive ? 'shap-pos' : 'shap-neg'}" style="width:${barPct}%"><span>${f.pct}</span></div></div>
-      <span class="shap-dir" style="color:${f.positive ? '#e11d48' : '#059669'}">${f.pct}</span>`;
-    shapList.appendChild(row);
+  // --- 3. แปลงข้อมูล SHAP ของ Backend ให้เข้ากับ Frontend ---
+  const factors = rawFactors.map(f => {
+      const rawImpact = f.impact || 0;
+      const isPositive = rawImpact >= 0;
+      const displayValue = Math.abs(rawImpact * 100); 
+      const displayLabel = featureDictionary[f.feature] || f.feature;
+
+      return {
+          label: displayLabel,
+          value: displayValue,
+          positive: isPositive,
+          pct: (isPositive ? '+' : '-') + displayValue.toFixed(1) + '%'
+      };
   });
 
-  // SHAP chart
+  // --- 4. วาดรายการ SHAP List ---
+  const shapList = document.getElementById('shapList');
+  shapList.innerHTML = '';
+  if (factors.length > 0) {
+      const maxVal = factors[0].value || 1;
+      factors.forEach(f => {
+        const row = document.createElement('div');
+        row.className = 'shap-row';
+        const barPct = Math.min(90, (f.value / maxVal) * 85); 
+        row.innerHTML = `<span class="shap-label">${f.label}</span>
+          <div class="shap-bar-wrap"><div class="shap-bar ${f.positive ? 'shap-pos' : 'shap-neg'}" style="width:${barPct}%"><span>${f.pct}</span></div></div>
+          <span class="shap-dir" style="color:${f.positive ? '#e11d48' : '#059669'}">${f.pct}</span>`;
+        shapList.appendChild(row);
+      });
+  }
+
+  // --- 5. วาดกราฟ Chart.js ---
   if(shapChartInstance) { shapChartInstance.destroy(); }
-  const topFactors = factors.slice(0,6);
+  const topFactors = factors.slice(0,6); 
   const chartColors = topFactors.map(f => f.positive ? '#e11d48' : '#10b981');
+  
   shapChartInstance = new Chart(document.getElementById('shapChart'), {
     type: 'bar',
     data: {

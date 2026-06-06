@@ -80,28 +80,38 @@ class DiabetesRiskPipeline:
         print(prob)
         risk_score = float((prob[1] * 0.5 + prob[2] * 1.0) * 100)
         
-        # shap_values = self.explainer.shap_values(X_pred)
+        shap_values = self.explainer.shap_values(X_pred)
         
-        # # กรณี SHAP return เป็น list (XGBoost Classifier มักได้เป็น list ของ class)
-        # # เราต้องดึง array ของ class ที่เราสนใจออกมา แล้วดึง index [0] ออกมาอีกที
-        # if isinstance(shap_values, list):
-        #     target_shap = shap_values[2][0] # นี่คือ array ของค่า impact
-        # else:
-        #     target_shap = shap_values[0]
+        # --- [เริ่มส่วนที่แก้ไข] ดักจับโครงสร้าง SHAP ทุกรูปแบบเพื่อดึง Class 2 ---
+        
+        # กรณี SHAP เวอร์ชันใหม่มากๆ อาจคืนค่าเป็น Explanation object ให้ดึง .values ออกมาดื้อๆ
+        if hasattr(shap_values, "values"):
+            shap_values = shap_values.values
 
-        # feature_impacts = []
-        # for feat_name, shap_val in zip(self.feature_names, target_shap):
-        #     # ใช้ .item() เพื่อแปลง numpy scalar เป็น float ของ Python
-        #     impact_val = float(shap_val) if not isinstance(shap_val, np.ndarray) else float(shap_val.item())
-        #     feature_impacts.append({
-        #         "feature": feat_name,
-        #         "impact": impact_val
-        #     })
+        if isinstance(shap_values, list):
+            # แบบเก่า: คืนค่าเป็น list ของแต่ละ Class -> เลือก Class 2 แถวที่ 0
+            target_shap = shap_values[2][0]
+        elif isinstance(shap_values, np.ndarray) and shap_values.ndim == 3:
+            # แบบใหม่ (3D Array): รูปแบบ (Samples, Features, Classes) 
+            # เราต้องการ Sample ที่ 0, ทุกฟีเจอร์ (:), และเจาะจง Class 2
+            target_shap = shap_values[0, :, 2]
+        else:
+            # กรณีหลุดโผเป็น 2D Array ปกติ
+            target_shap = shap_values[0] if isinstance(shap_values, np.ndarray) else shap_values
+
+        feature_impacts = []
+        for feat_name, shap_val in zip(self.feature_names, target_shap):
+            # เมื่อ target_shap เป็น 1D Array แล้ว shap_val จะเป็นตัวเลขเดี่ยวๆ แน่นอน
+            impact_val = float(shap_val) 
+            feature_impacts.append({
+                "feature": feat_name,
+                "impact": impact_val
+            })
             
-        # feature_impacts = sorted(feature_impacts, key=lambda x: x["impact"], reverse=True)
+        feature_impacts = sorted(feature_impacts, key=lambda x: x["impact"], reverse=True)
 
         return {
             "risk_score": round(risk_score, 2),
-            # "top_factors": feature_impacts[:3],
-            # "recommendation": "ควรเพิ่มการออกกำลังกาย" if risk_score > 50 else "สุขภาพดีเยี่ยม"
+            "top_factors": feature_impacts[:3], # เปิดใช้งานเพื่อให้ Frontend นำไปวาดกราฟ SHAP ได้
+            "recommendation": "แนะนำให้พบแพทย์เพื่อตรวจระดับน้ำตาลในเลือดโดยเร็ว" if risk_score > 80 else "ควรติดตามระดับน้ำตาลสม่ำเสมอ" if risk_score > 50 else "สุขภาพดีเยี่ยม"
         }
