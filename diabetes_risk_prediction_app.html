@@ -93,100 +93,106 @@
       </div>
     </div>
   </div>
-
-        <!-- PREDICTION PAGE -->
-        <div class="page" id="page-predict">
-          <div class="pred-header">
-            <h2>🤖 AI Diabetes Risk Assessment</h2>
-            <p>กรอกข้อมูลสุขภาพของคุณเพื่อรับการวิเคราะห์ด้วย AI</p>
+  <!-- PREDICTION PAGE -->
+  <div class="page" id="page-predict">
+    <div class="pred-header">
+      <h2>🤖 AI Diabetes Risk Assessment</h2>
+      <p>กรอกข้อมูลสุขภาพของคุณเพื่อรับการวิเคราะห์ด้วย AI</p>
+    </div>
+    <div class="pred-body">
+      <div class="cards-grid">
+        <!-- CARD 1 -->
+        <div class="form-card">
+          <div class="form-card-header">
+            <div class="form-card-icon">👤</div>
+            <h3>Personal Information</h3>
           </div>
-          <div class="pred-body">
-            <div class="cards-grid">
-              <!-- CARD 1 -->
-              <div class="form-card">
-        <div class="form-card-header">
-          <div class="form-card-icon">👤</div>
-          <h3>Patient Profile</h3>
+          <div class="form-group">
+            <label class="form-label">Age</label>
+            <div class="range-row">
+              <input type="number" class="form-input" id="Age">
+              <span class="range-val" id="age-val"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Gender</label>
+            <select class="form-select" id="gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
         </div>
-
-        <div class="form-group">
-          <label class="form-label">Age</label>
-          <input type="number" class="form-input" id="age" value="70">
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Gender</label>
-          <select class="form-select" id="gender">
-            <option value="0">Male</option>
-            <option value="1">Female</option>
-          </select>
-        </div>
-      </div>
 
         <!-- CARD 2 -->
-       <div class="form-card">
-  <div class="form-card-header">
-    <div class="form-card-icon">⌚</div>
-    <h3>Wearable Health Metrics</h3>
-  </div>
+        <div class="form-card">
+          <div class="form-card-header">
+            <div class="form-card-icon">🩺</div>
+            <h3>Health Metrics</h3>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Resting Heart Rate</label>
+            <div class="range-row">
+              <input type="number" class="form-input" id="Resting Heart Rate">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Sleep HRV Average</label>
+            <div class="range-row">
+              <input type="number" class="form-input" id="Sleep HRV Average" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">SpO₂</label>
+            <div class="range-row">
+              <input type="number" class="form-input" id="SpO₂">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Sleep Duration (hrs)</label>
+            <div class="range-row">
+              <input type="number" class="form-input" id="Sleep Duration (hrs)" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Sleep Efficiency (%)</label>
+            <div class="range-row">
+              <input type="number" class="form-input" id="Sleep Efficiency (%)">
+            </div>
+          </div>
+            <div class="form-group">
+              <label class="form-label">Sleep Regularity Index</label>
+              <input type="number" class="form-input" id="Sleep Regularity Index">
+            </div>
+        </div>
 
-  <div class="form-group">
-    <label class="form-label">Resting Heart Rate</label>
-    <input type="number" class="form-input" id="rhr" value="95">
-  </div>
-
-  <div class="form-group">
-    <label class="form-label">Sleep HRV Average</label>
-    <input type="number" class="form-input" id="hrv" value="25">
-  </div>
-
-  <div class="form-group">
-    <label class="form-label">SpO₂</label>
-    <input type="number" class="form-input" id="spo2" value="91">
-  </div>
-
-  <div class="form-group">
-    <label class="form-label">Sleep Duration (hrs)</label>
-    <input type="number" class="form-input" id="sleepDuration" value="4.5">
-  </div>
-
-  <div class="form-group">
-    <label class="form-label">Sleep Efficiency (%)</label>
-    <input type="number" class="form-input" id="sleepEfficiency" value="65">
-  </div>
-
-  <div class="form-group">
-    <label class="form-label">Sleep Regularity Index</label>
-    <input type="number" class="form-input" id="sleepRegularity" value="55">
-  </div>
-</div>
         <!-- CARD 3 -->
         <div class="form-card">
-  <div class="form-card-header">
-    <div class="form-card-icon">🏃</div>
-    <h3>Activity Analysis</h3>
-  </div>
+          <div class="form-card-header">
+            <div class="form-card-icon">🏃</div>
+            <h3>Lifestyle Factors</h3>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Total_Daily_Steps</label>
+            <div class="range-row">
+              <input type="number" class="form-input" id="Total_Daily_Steps">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Sedentary Hours</label>
+            <div class="range-row">
+              <input type="number" class="form-input" id="Sedentary Hours">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Clinical Notes</label>
 
-  <div class="form-group">
-    <label class="form-label">Daily Steps</label>
-    <input type="number" class="form-input" id="steps" value="1200">
-  </div>
-
-  <div class="form-group">
-    <label class="form-label">Sedentary Hours</label>
-    <input type="number" class="form-input" id="sedentary" value="15">
-  </div>
-
-  <div class="form-group">
-    <label class="form-label">Clinical Notes</label>
-
-    <textarea
-      id="clinicalNotes"
-      rows="6"
-      class="form-textarea"
-    >มีโรคอ้วน ความดันโลหิตสูง ไขมันพอกตับ ประวัติครอบครัวเป็นเบาหวาน และไม่ออกกำลังกาย</textarea>
-  </div>
-</div>
+            <textarea id="clinicalNotes" rows="6" class="form-textarea">มีโรคอ้วน ความดันโลหิตสูง ไขมันพอกตับ ประวัติครอบครัวเป็นเบาหวาน และไม่ออกกำลังกาย</textarea>
+          </div>
+          <div class="form-group" style="margin-top:12px; padding: 12px; background: #f0fdfa; border-radius: 8px; border: 1px solid #99f6e4;">
+            <p style="font-size:12px; color:#0f766e; font-weight:500; line-height:1.6;">💡 ข้อมูลทั้งหมดถูกประมวลผลด้วย Random Forest Classifier ที่ผ่านการฝึกด้วยข้อมูล 10,000 ราย</p>
+          </div>
+        </div>
+      </div>
 
       <div class="pred-submit">
         <button class="predict-btn" id="predictBtn" onclick="runPrediction()">
@@ -315,6 +321,7 @@
   <footer>
     <p>DiabetesAI — AI-Powered Diabetes Risk Prediction System · สำหรับการศึกษาเท่านั้น ไม่ใช่คำแนะนำทางการแพทย์</p>
   </footer>
+</div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
