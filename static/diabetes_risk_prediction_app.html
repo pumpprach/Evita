@@ -110,7 +110,7 @@
           <div class="form-group">
             <label class="form-label">Age</label>
             <div class="range-row">
-              <input type="number" class="form-input" id="Age">
+              <input type="number" class="form-input" id="age">
               <span class="range-val" id="age-val"></span>
             </div>
           </div>
@@ -132,36 +132,36 @@
           <div class="form-group">
             <label class="form-label">Resting Heart Rate</label>
             <div class="range-row">
-              <input type="number" class="form-input" id="Resting Heart Rate">
+              <input type="number" class="form-input" id="rhr">
             </div>
           </div>
           <div class="form-group">
             <label class="form-label">Sleep HRV Average</label>
             <div class="range-row">
-              <input type="number" class="form-input" id="Sleep HRV Average" >
+              <input type="number" class="form-input" id="hrv" >
             </div>
           </div>
           <div class="form-group">
             <label class="form-label">SpO₂</label>
             <div class="range-row">
-              <input type="number" class="form-input" id="SpO₂">
+              <input type="number" class="form-input" id="spo2">
             </div>
           </div>
           <div class="form-group">
             <label class="form-label">Sleep Duration (hrs)</label>
             <div class="range-row">
-              <input type="number" class="form-input" id="Sleep Duration (hrs)" >
+              <input type="number" class="form-input" id="sleepDuration" >
             </div>
           </div>
           <div class="form-group">
             <label class="form-label">Sleep Efficiency (%)</label>
             <div class="range-row">
-              <input type="number" class="form-input" id="Sleep Efficiency (%)">
+              <input type="number" class="form-input" id="sleepEfficiency">
             </div>
           </div>
             <div class="form-group">
               <label class="form-label">Sleep Regularity Index</label>
-              <input type="number" class="form-input" id="Sleep Regularity Index">
+              <input type="number" class="form-input" id="sleepRegularity">
             </div>
         </div>
 
@@ -174,13 +174,13 @@
           <div class="form-group">
             <label class="form-label">Total_Daily_Steps</label>
             <div class="range-row">
-              <input type="number" class="form-input" id="Total_Daily_Steps">
+              <input type="number" class="form-input" id="steps">
             </div>
           </div>
           <div class="form-group">
             <label class="form-label">Sedentary Hours</label>
             <div class="range-row">
-              <input type="number" class="form-input" id="Sedentary Hours">
+              <input type="number" class="form-input" id="sedentary">
             </div>
           </div>
           <div class="form-group">
@@ -345,49 +345,6 @@ bars.forEach((h, i) => {
 });
 
 let shapChartInstance = null;
-
-function computeRisk() {
-  const age = parseInt(document.getElementById('age').value);
-  const bmi = parseFloat(document.getElementById('bmi').value);
-  const glucose = parseInt(document.getElementById('glucose').value);
-  const hba1c = parseFloat(document.getElementById('hba1c').value);
-  const bp = parseInt(document.getElementById('bp').value);
-  const chol = parseInt(document.getElementById('chol').value);
-  const family = parseInt(document.getElementById('family').value);
-  const smoking = document.getElementById('smoking').value;
-  const exercise = parseInt(document.getElementById('exercise').value);
-  const sleep = parseFloat(document.getElementById('sleep').value);
-  const alcohol = document.getElementById('alcohol').value;
-
-  const glucoseScore = Math.min(35, Math.max(0, (glucose - 100) / 4));
-  const hba1cScore = Math.min(25, Math.max(0, (hba1c - 5) * 6));
-  const bmiScore = Math.min(20, Math.max(0, (bmi - 22) / 0.7));
-  const familyScore = family === 1 ? 15 : 0;
-  const ageScore = Math.min(12, Math.max(0, (age - 30) / 4));
-  const bpScore = Math.min(10, Math.max(0, (bp - 120) / 6));
-  const cholScore = Math.min(8, Math.max(0, (chol - 200) / 20));
-  const smokingScore = smoking === 'current' ? 8 : smoking === 'former' ? 4 : 0;
-  const exerciseScore = -Math.min(10, exercise * 1.8);
-  const sleepScore = sleep < 6 ? -4 : sleep > 9 ? -2 : -6;
-  const alcoholScore = alcohol === 'heavy' ? 6 : alcohol === 'moderate' ? 3 : 0;
-
-  const raw = glucoseScore + hba1cScore + bmiScore + familyScore + ageScore + bpScore + cholScore + smokingScore + exerciseScore + sleepScore + alcoholScore;
-  const risk = Math.min(98, Math.max(5, Math.round(raw + 20)));
-
-  return {
-    risk,
-    factors: [
-      { label: 'Fasting Glucose', value: glucoseScore, positive: glucoseScore > 0, pct: '+' + glucoseScore.toFixed(0) + '%' },
-      { label: 'HbA1c Level', value: hba1cScore, positive: hba1cScore > 0, pct: '+' + hba1cScore.toFixed(0) + '%' },
-      { label: 'BMI', value: bmiScore, positive: bmiScore > 0, pct: '+' + bmiScore.toFixed(0) + '%' },
-      { label: 'Family History', value: familyScore, positive: familyScore > 0, pct: (familyScore > 0 ? '+' : '') + familyScore + '%' },
-      { label: 'Age', value: ageScore, positive: ageScore > 0, pct: '+' + ageScore.toFixed(0) + '%' },
-      { label: 'Blood Pressure', value: bpScore, positive: bpScore > 0, pct: '+' + bpScore.toFixed(0) + '%' },
-      { label: 'Regular Exercise', value: Math.abs(exerciseScore), positive: false, pct: exerciseScore.toFixed(0) + '%' },
-      { label: 'Sleep Quality', value: Math.abs(sleepScore), positive: false, pct: sleepScore.toFixed(0) + '%' },
-    ].sort((a,b) => b.value - a.value)
-  };
-}
 
 async function runPrediction() {
 
